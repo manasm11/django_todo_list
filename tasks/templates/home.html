@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block title %} ToDo List {% endblock title %}
+{% block body %}
+<form method="post">
+    {% csrf_token %}
+    <label for="task">Enter New Task</label>
+    <input type="text" name="title" id="task" />
+    <input type="text" name="content" id="task" />
+    <input type="hidden" name="ischecked" value="False">
+    <input type="submit" value="Add">
+    <table>
+        {% for task in tasks %}
+        <tr class="isdone">
+            <td>{{ task.title }}</td>
+            <td>{{ task.content }}</td>
+            <td> <input type="hidden" name="checked{{task.id}}" class="ischecked" value="{{ task.ischecked }}"/></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <input type="submit" value="Refresh">
+</form>
+{% endblock body %}
+{% block css %}
+<style>
+    .striked {
+        text-decoration: line-through;
+    }
+    
+    .isdone {
+        cursor: pointer;
+    }
+</style>
+{% endblock css %}
+{% block js %}
+<script>
+    function toggle_tr_ischecked(tr) {
+        isChecked_input = $($(tr).children()[2].firstElementChild)
+        newValue = isChecked_input.attr("value") == "True" ? "False" : "True"
+        isChecked_input.attr("value", newValue);
+    }
+    $(".isdone").click(function() {
+        $(this).toggleClass("striked")
+        toggle_tr_ischecked(this)
+            // console.log($($(this).children()[2]));
+    })
+</script>
+{% endblock js %}
