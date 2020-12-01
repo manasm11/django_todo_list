@@ -22,16 +22,16 @@
     </div>
     <table class="table table-hover">
         <thead>
-            <tr>
-                <th scope="col-4">Title</th>
-                <th scope="col-8">Task</th>
+            <tr class="row">
+                <th class="col-4">Title</th>
+                <th class="col-8">Task</th>
             </tr>
         </thead>
         <tbody>
             {% for task in tasks %}
-            <tr class="isdone">
-                <td>{{ task.title }}</td>
-                <td>{{ task.content }}</td>
+            <tr class="isdone row">
+                <td class="col-4">{{ task.title }}</td>
+                <td class="col-8">{{ task.content }}</td>
                 <td>
                     <input type="hidden" name="checked{{task.id}}" class="ischecked" value="{{ task.ischecked }}" />
                 </td>
