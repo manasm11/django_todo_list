@@ -1,36 +1,60 @@
-{% extends "base.html" %} {% block title %} ToDo List {% endblock title %}
-{% block body %}
+{% extends "base.html" %} {% block title %} ToDo List {% endblock title %} {% block body %}
 <form method="post">
     {% csrf_token %}
-    <label for="task">Enter New Task</label>
-    <input type="text" name="title" id="task" />
-    <input type="text" name="content" id="task" />
-    <input type="hidden" name="ischecked" value="False">
-    <input type="submit" value="Add">
-    <table>
-        {% for task in tasks %}
-        <tr class="isdone">
-            <td>{{ task.title }}</td>
-            <td>{{ task.content }}</td>
-            <td> <input type="hidden" name="checked{{task.id}}" class="ischecked" value="{{ task.ischecked }}"/></td>
-        </tr>
-        {% endfor %}
+    <div class="form-group mt-3 row">
+        <div class="form-group col-sm-5">
+            <label for="title" class="h4 ml-2">Enter Title</label>
+            <input type="text" autocomplete="off" name="title" id="task" class="form-control" />
+        </div>
+        <div class="form-group col-sm-5">
+            <label for="content" class="h4 ml-2">Enter Task</label>
+            <input type="text" autocomplete="off" name="content" id="task" class="form-control" />
+        </div>
+        <input type="hidden" name="ischecked" value="False">
+        <div class="form-group col-sm-2 mt-auto">
+            <input type="submit" value="Add" class="btn btn-outline-primary w-100">
+        </div>
+    </div>
+    <h2>ToDo-List</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col-4">Title</th>
+                <th scope="col-8">Task</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr class="isdone">
+                <td>{{ task.title }}</td>
+                <td>{{ task.content }}</td>
+                <td>
+                    <input type="hidden" name="checked{{task.id}}" class="ischecked" value="{{ task.ischecked }}" />
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
-    <input type="submit" value="Refresh">
+    <input class="btn btn-outline-primary fixed-bottom mb-5 ml-4" type="submit" value="Refresh">
 </form>
-{% endblock body %}
-{% block css %}
+{% endblock body %} {% block css %}
 <style>
     .striked {
         text-decoration: line-through;
+        color: red !important;
     }
     
     .isdone {
+        font-weight: bold;
         cursor: pointer;
+        color: rgb(0, 95, 0);
+    }
+    
+    tbody>tr:hover {
+        font-size: large !important;
     }
 </style>
-{% endblock css %}
-{% block js %}
+{% endblock css %} {% block js %}
 <script>
     function toggle_tr_ischecked(tr) {
         isChecked_input = $($(tr).children()[2].firstElementChild)
