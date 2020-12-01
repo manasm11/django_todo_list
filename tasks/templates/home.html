@@ -15,7 +15,11 @@
             <input type="submit" value="Add" class="btn btn-outline-primary w-100">
         </div>
     </div>
-    <h2>ToDo-List</h2>
+
+    <div>
+        <h2 class="d-inline">ToDo-List</h2>
+        <input class="btn btn-outline-primary float-right mb-5 ml-4" type="submit" value="Refresh">
+    </div>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -35,7 +39,6 @@
             {% endfor %}
         </tbody>
     </table>
-    <input class="btn btn-outline-primary fixed-bottom mb-5 ml-4" type="submit" value="Refresh">
 </form>
 {% endblock body %} {% block css %}
 <style>
