@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %} ToDo List {% endblock title %} {% block body %}
+{% extends "base.html" %} {% load static %} {% block title %} ToDo List {% endblock title %} {% block body %}
 <form method="post">
     {% csrf_token %}
     <div class="form-group mt-3 row">
@@ -12,13 +12,13 @@
         </div>
         <input type="hidden" name="ischecked" value="False">
         <div class="form-group col-sm-2 mt-auto">
-            <input type="submit" value="Add" class="btn btn-outline-primary w-100">
+            <button type="submit" class="btn btn-primary w-100 shadow-lg"><h5>Add</h5></button>
         </div>
     </div>
 
-    <div>
-        <h2 class="d-inline">ToDo-List</h2>
-        <input class="btn btn-outline-primary float-right mb-5 ml-4" type="submit" value="Refresh">
+    <div class="row">
+        <div class="d-inline h2 col-11">ToDo-List</div>
+        <button class="btn btn-primary float-right mb-5 ml-auto col-1 p-2" type="submit" value="Refresh"> <i class="fa fa-refresh fa-2x"></i></button>
     </div>
     <table class="table table-hover">
         <thead>
@@ -55,6 +55,25 @@
     
     tbody>tr:hover {
         font-size: large !important;
+    }
+    
+    body::before {
+        content: "";
+        background-size: cover;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        filter: blur(3px);
+        background-image: url({% static 'imgs/bg-img.jpg' %});
+    }
+    
+    td,
+    tr {
+        font-size: larger;
     }
 </style>
 {% endblock css %} {% block js %}
